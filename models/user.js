@@ -7,14 +7,12 @@ module.exports = function (sequelize, DataTypes){
         type: DataTypes.STRING, 
         unique: true, 
         validate: {
-          notNull: false,
           len: [6, 30],
           }
     },
     password: {
         type:DataTypes.STRING,
         validate: {
-          notNull: false,
           notEmpty: true
         }
       }
@@ -28,7 +26,7 @@ module.exports = function (sequelize, DataTypes){
     }, 
       comparePass: function(userpass, dbpass) {
       // don't salt twice when you compare....watch out for this
-        return bcrypt.compareSync((userpass), dbpass);  
+        return bcrypt.compareSync(userpass, dbpass);  
     },
       createNewUser:function(username, password, err, success ) {
         if(password.length < 6) {
